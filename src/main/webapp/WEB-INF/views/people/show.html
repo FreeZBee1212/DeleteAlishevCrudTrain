@@ -9,7 +9,7 @@
 <p th:text="${show.getName()}">VALUE</p>
 <p th:text="${show.getId()}">VALUE</p>
 <br>
-<a th:href="@{/people/{id}/edit(id=${show.getId()})}">Edit this person</a>
+<a th:href="@{/people/id/edit(id=${show.getId()})}">Edit this person</a>
 <br>
 
 <form th:method="POST" th:action="@{/people/{id}(id=${show.getId()})}">

@@ -23,11 +23,16 @@ public class PeopleController {
         return "people/index";
     }
 
-    @GetMapping("/{id}")
-    public String show(@PathVariable("id") int id, Model model) {
-        model.addAttribute("show", personDao.showOne(id));
-        return "people/show";
-    }
+//    @GetMapping("/{id}")
+//    public String show(@PathVariable("id") int id, Model model) {
+//        model.addAttribute("show", personDao.showOne(id));
+//        return "people/show";
+//    }
+@GetMapping("/id")
+public String show(@RequestParam("id") int id, Model model) {
+    model.addAttribute("show", personDao.showOne(id));
+    return "people/show";
+}
 
     @GetMapping("/new")
     public String newPerson(Model model) {
@@ -41,14 +46,20 @@ public class PeopleController {
         return "redirect:/people";
     }
 
-    @GetMapping("/{id}/edit")
-    public String edit(Model model, @PathVariable("id") int id) {
+    @GetMapping("/id/edit")
+    public String edit(Model model, @RequestParam("id") int id) {
         model.addAttribute("person", personDao.showOne(id));
         return "people/edit";
     }
 
+//    @GetMapping("/{id}/edit")
+//    public String edit(Model model, @PathVariable("id") int id) {
+//        model.addAttribute("person", personDao.showOne(id));
+//        return "people/edit";
+//    }
+
     @PostMapping("/{id}")
-    public String update(@ModelAttribute("person") Person person, @PathVariable("id") int id) {
+    public String update(@ModelAttribute("person") Person person) {
         personDao.update(person);
         return "redirect:/people";
     }
