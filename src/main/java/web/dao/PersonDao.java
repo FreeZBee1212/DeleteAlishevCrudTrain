@@ -11,6 +11,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
+@Transactional
 public class PersonDao {
 
     @PersistenceContext
@@ -23,25 +24,25 @@ public class PersonDao {
                 .getResultList();
     }
 
-    @Transactional
+
     public Person showOne(int id){
 
         return entityManager.find(Person.class, id);
     }
-    @Transactional
+
     public void save(Person person) {
         entityManager.persist(person);
     }
 
-    @Transactional
+
     public void update(Person updatedPerson) {
         entityManager.merge(updatedPerson);
     }
 
-    @Transactional
+
     public void delete(int id){
-        Person person = entityManager.find(Person.class, id);
-        entityManager.remove(person);
+        entityManager.flush();
+        entityManager.remove(entityManager.find(Person.class, id));
 
             }
         }

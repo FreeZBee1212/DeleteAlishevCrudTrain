@@ -2,13 +2,14 @@ package web.model;
 
 
 import javax.persistence.*;
+import java.util.Objects;
 
 
 @Entity
-@Table(name = "Person")
+@Table(name = "person")
 public class Person {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Column(name = "name")
     private String name;
@@ -56,5 +57,18 @@ public class Person {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return id == person.id && age == person.age && Objects.equals(name, person.name) && Objects.equals(surname, person.surname);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, surname, age);
     }
 }
