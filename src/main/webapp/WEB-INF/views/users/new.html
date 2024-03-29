@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create new user</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/users}" th:object="${user}">
+    <label for="name">Enter your name: </label>
+    <input type="text" th:field="*{name}" id="name"/>
+    <label for="surname">Enter your surname: </label>
+    <input type="text" th:field="*{surname}" id="surname"/>
+    <label for="age">Enter your age</label>
+    <input type="text" th:field="*{age}" id="age"/>
+    <br/>
+    <input type="submit" VALUE="Create!">
+
+</form>
+
+</body>
+</html>

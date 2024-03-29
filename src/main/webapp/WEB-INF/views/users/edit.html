@@ -2,19 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Edit person</title>
+    <title>Edit user</title>
 </head>
 <body>
 
-<form th:method="POST" th:action="@{/people/id(id=${person.getId()})}" th:object="${person}">
+<form th:method="POST" th:action="@{/users/id(id=${user.getId()})}" th:object="${user}">
     <label for="name">Edit name: </label>
     <input type="text" th:field="*{name}" id="name">
-        <label for="surname">Edit surname: </label>
-        <input type="text" th:field="*{surname}" id="surname">
+    <label for="surname">Edit surname: </label>
+    <input type="text" th:field="*{surname}" id="surname">
     <label for="age">Edit age: </label>
     <input type="text" th:field="*{age}" id="age">
     <br>
-    <input type="submit" VALUE="Update person">
+    <input type="submit" VALUE="Update user">
 </form>
 
 </body>

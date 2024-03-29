@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>All People</title>
+    <title>All Users</title>
 </head>
 <body>
 
@@ -12,14 +12,14 @@
 <!--    <a th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getAge()}">user</a>-->
 <!--</div>-->
 
-<div th:each="person : ${index}">
-    <a th:href="@{/people/id(id=${person.getId()})}" th:text="${person.getName()}">user</a>
-    <a th:href="@{/people/id(id=${person.getId()})}" th:text="${person.getSurname()}">user</a>
-    <a th:href="@{/people/id(id=${person.getId()})}" th:text="${person.getAge()}">user</a>
+<div th:each="user : ${index}">
+    <a th:href="@{/users/id(id=${user.getId()})}" th:text="${user.getName()}">user</a>
+    <a th:href="@{/users/id(id=${user.getId()})}" th:text="${user.getSurname()}">user</a>
+    <a th:href="@{/users/id(id=${user.getId()})}" th:text="${user.getAge()}">user</a>
 </div>
 
 <br>
-<a th:href="@{/people/new}">Create new Person</a>
+<a th:href="@{/users/new}">Create new User</a>
 
 </body>
 </html>
