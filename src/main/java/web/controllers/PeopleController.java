@@ -6,20 +6,24 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import web.dao.PersonDao;
 import web.model.Person;
+import web.service.PersonService;
 
 @Controller
 @RequestMapping("/people")
 public class PeopleController {
-    PersonDao personDao;
+    private final PersonService personService;
 
     @Autowired
-    public PeopleController(PersonDao personDao) {
-        this.personDao = personDao;
+    public PeopleController(PersonService personService) {
+        this.personService = personService;
     }
+
+
+
 
     @GetMapping()
     public String index(Model model) {
-        model.addAttribute("index", personDao.index());
+        model.addAttribute("index", personService.index());
         return "people/index";
     }
 
@@ -30,7 +34,7 @@ public class PeopleController {
 //    }
 @GetMapping("/id")
 public String show(@RequestParam("id") int id, Model model) {
-    model.addAttribute("show", personDao.showOne(id));
+    model.addAttribute("show", personService.showOne(id));
     return "people/show";
 }
 
@@ -42,13 +46,13 @@ public String show(@RequestParam("id") int id, Model model) {
 
     @PostMapping()
     public String createPerson(@ModelAttribute("person") Person person) {
-        personDao.save(person);
+        personService.save(person);
         return "redirect:/people";
     }
 
     @GetMapping("/id/edit")
     public String edit(Model model, @RequestParam("id") int id) {
-        model.addAttribute("person", personDao.showOne(id));
+        model.addAttribute("person", personService.showOne(id));
         return "people/edit";
     }
 
@@ -60,7 +64,7 @@ public String show(@RequestParam("id") int id, Model model) {
 
     @PostMapping("/{id}")
     public String update(@ModelAttribute("person") Person person) {
-        personDao.update(person);
+        personService.update(person);
         return "redirect:/people";
     }
 
@@ -71,7 +75,7 @@ public String show(@RequestParam("id") int id, Model model) {
 //    }
     @PostMapping("/delete")
     public String Delete(@RequestParam("id") int id) {
-        personDao.delete(id);
+        personService.delete(id);
         return "redirect:/people";
     }
 }

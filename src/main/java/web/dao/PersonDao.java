@@ -3,7 +3,6 @@ package web.dao;
 
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import web.model.Person;
 
 import javax.persistence.EntityManager;
@@ -11,14 +10,13 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-@Transactional
 public class PersonDao {
 
     @PersistenceContext
     private EntityManager entityManager;
 
 
-    @Transactional(readOnly = true)
+
     public List<Person> index(){
         return entityManager.createQuery("select p from Person p", Person.class)
                 .getResultList();
@@ -40,11 +38,25 @@ public class PersonDao {
     }
 
 
-    public void delete(int id){
-        entityManager.flush();
-        entityManager.remove(entityManager.find(Person.class, id));
-
+        public void delete(int id){
+        entityManager.remove(index());
+//        entityManager.remove(id);
             }
-        }
+//    public void delete(int id) {
+//        Person personToDelete = entityManager.find(Person.class, id);
+//
+//        if (personToDelete != null) {
+//            entityManager.remove(personToDelete);
+//        } else {
+//            System.out.println("Person with id " + id + " not found for deletion");
+//        }
+//    }
+}
+
+//    public void delete(int id){
+//        entityManager.remove(entityManager.find(Person.class, id));
+////        entityManager.remove(id);
+//            }
+//        }
 
 
