@@ -35,7 +35,7 @@ public class UserServiceImpl {
         userDaoImpl.updateUser(updatedUser);
     }
 
-    public void deleteUser(int id) {
-        userDaoImpl.deleteUser(id);
+    public void deleteUser(User user) {
+        userDaoImpl.deleteUser(user);
     }
 }

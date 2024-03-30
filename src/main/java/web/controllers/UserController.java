@@ -56,7 +56,8 @@ public class UserController {
 
     @PostMapping("/delete")
     public String Delete(@RequestParam("id") int id) {
-        userServiceImpl.deleteUser(id);
+        User userDelete = userServiceImpl.showOneUser(id);
+        userServiceImpl.deleteUser(userDelete);
         return "redirect:/users";
     }
 }
