@@ -19,19 +19,19 @@ public class UserController {
 
 
     @GetMapping()
-    public String index(Model model) {
-        model.addAttribute("index", userServiceImpl.index());
+    public String getUsers(Model model) {
+        model.addAttribute("index", userServiceImpl.getUsers());
         return "users/index";
     }
 
     @GetMapping("/id")
-    public String show(@RequestParam("id") int id, Model model) {
+    public String showId(@RequestParam("id") int id, Model model) {
         model.addAttribute("show", userServiceImpl.showOneUser(id));
         return "users/show";
     }
 
     @GetMapping("/new")
-    public String newUser(Model model) {
+    public String createNewUser(Model model) {
         model.addAttribute("user", new User());
         return "users/new";
     }
@@ -55,7 +55,7 @@ public class UserController {
     }
 
     @PostMapping("/delete")
-    public String Delete(@RequestParam("id") int id) {
+    public String delete(@RequestParam("id") int id) {
         User userDelete = userServiceImpl.showOneUser(id);
         userServiceImpl.deleteUser(userDelete);
         return "redirect:/users";
