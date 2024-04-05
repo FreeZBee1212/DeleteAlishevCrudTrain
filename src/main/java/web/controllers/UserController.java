@@ -5,28 +5,29 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import web.model.User;
+import web.service.UserService;
 import web.service.UserServiceImpl;
 
 @Controller
 @RequestMapping("/users")
 public class UserController {
-    private final UserServiceImpl userServiceImpl;
+    private final UserService userService;
 
     @Autowired
-    public UserController(UserServiceImpl userServiceImpl) {
-        this.userServiceImpl = userServiceImpl;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
 
     @GetMapping()
     public String getUsers(Model model) {
-        model.addAttribute("index", userServiceImpl.getUsers());
+        model.addAttribute("index", userService.getUsers());
         return "users/index";
     }
 
     @GetMapping("/id")
     public String showId(@RequestParam("id") int id, Model model) {
-        model.addAttribute("show", userServiceImpl.showOneUser(id));
+        model.addAttribute("show", userService.showOneUser(id));
         return "users/show";
     }
 
@@ -38,26 +39,26 @@ public class UserController {
 
     @PostMapping()
     public String createUser(@ModelAttribute("user") User user) {
-        userServiceImpl.saveUser(user);
+        userService.saveUser(user);
         return "redirect:/users";
     }
 
     @GetMapping("/id/edit")
     public String edit(Model model, @RequestParam("id") int id) {
-        model.addAttribute("user", userServiceImpl.showOneUser(id));
+        model.addAttribute("user", userService.showOneUser(id));
         return "users/edit";
     }
 
     @PostMapping("/{id}")
     public String update(@ModelAttribute("person") User user) {
-        userServiceImpl.updateUser(user);
+        userService.updateUser(user);
         return "redirect:/users";
     }
 
     @PostMapping("/delete")
     public String delete(@RequestParam("id") int id) {
-        User userDelete = userServiceImpl.showOneUser(id);
-        userServiceImpl.deleteUser(userDelete);
+        User userDelete = userService.showOneUser(id);
+        userService.deleteUser(userDelete);
         return "redirect:/users";
     }
 }
