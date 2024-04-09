@@ -32,7 +32,7 @@ public class UserController {
     }
 
     @GetMapping("/new")
-    public String createNewUser(Model model) {
+    public String userCreationPage(Model model) {
         model.addAttribute("user", new User());
         return "users/new";
     }
@@ -44,7 +44,7 @@ public class UserController {
     }
 
     @GetMapping("/id/edit")
-    public String edit(Model model, @RequestParam("id") int id) {
+    public String userEditingPage(Model model, @RequestParam("id") int id) {
         model.addAttribute("user", userService.showOneUser(id));
         return "users/edit";
     }
